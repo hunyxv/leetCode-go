@@ -15,7 +15,7 @@ func threeSum(nums []int) [][]int {
 			return res
 		}
 
-		if p1 > 0 && nums[p1] == nums[p1-1] {
+		if p1 > 0 && nums[p1] == nums[p1-1] {         	// 去重
 			continue
 		}
 
@@ -33,7 +33,7 @@ func threeSum(nums []int) [][]int {
 				}
 				p2++
 				p3--
-			} else if nums[p1] + nums[p2] < -nums[p3] {			// 去重
+			} else if nums[p1] + nums[p2] < -nums[p3] {
 				p2++
 			} else {
 				p3--
