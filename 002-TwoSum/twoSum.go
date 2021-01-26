@@ -1,7 +1,4 @@
-package main
-
-import "fmt"
-
+package twoSum
 
 func twoSum(nums []int, target int) []int {
 	tmp := make(map[int]int)
@@ -17,7 +14,16 @@ func twoSum(nums []int, target int) []int {
 	return nil
 }
 
-func main() {
-	res := twoSum([]int{2,7,11,15}, 18)
-	fmt.Println(res)
+func twoSum2(nums []int, target int) []int {
+	for i := 0; i < len(nums); i++ {
+		sub := target - nums[i]
+		for j := i + 1; j < len(nums); j++ {
+			if sub == nums[j] {
+				return []int{i, j}
+			}
+		}
+	}
+	return nil
 }
+
+// func main() {}
