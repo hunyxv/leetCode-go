@@ -1,20 +1,19 @@
-package main
+package reverseinteger
 
-import "fmt"
-
-func reverseInteger(num int) int {
-	var res int
-	for num != 0 {
-		res = res * 10 + num % 10
-		num /= 10
+func reverse(x int) int {
+	if x == 0 {
+		return x
 	}
-	if res < -(1<<31) || res > 1<<31-1 {
+
+	var result int
+	for x != 0 {
+		mid := x % 10
+		x = x / 10
+		result = result*10 + mid
+	}
+	if result > 1<<31-1 || result < -(1<<31) {
 		return 0
 	}
-	return res
-}
 
-func main() {
-	fmt.Println(reverseInteger(4634397))
-	fmt.Println(reverseInteger(4637194397))
+	return result
 }

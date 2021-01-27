@@ -1,45 +1,39 @@
-package main
+package threesumclosest
 
-import (
-	"fmt"
-	"sort"
-)
+import "sort"
 
 func threeSumClosest(nums []int, target int) int {
-	var res int = 1 <<63-1
+	var result = 1<<32 - 1
+	var ones, second, third, sum int
 
 	sort.Ints(nums)
-	abs := func(n int) int {
-		if n < 0 {
-			return -n
-		}
-		return n
-	}
-
-	for p1 := 0; p1 < len(nums); p1++ {
-		if p1 > 0 && nums[p1] == nums[p1-1] {
+	for ones = 0; ones < len(nums)-2; ones++ {
+		if ones > 0 && nums[ones] == nums[ones-1] {
 			continue
 		}
-		
-		for p2, p3 := p1 + 1, len(nums) - 1; p2 < p3; {
-			sum := nums[p1] + nums[p2] + nums[p3]
-			
+
+		second, third = ones+1, len(nums)-1
+		for second < third {
+			sum = nums[ones] + nums[second] + nums[third]
+			if abs(sum-target) < abs(result-target) {
+				result = sum
+			}
+
 			if sum < target {
-				p2++
+				second++
 			} else if sum > target {
-				p3--
+				third--
 			} else {
 				return sum
 			}
-			if abs(sum - target) < abs(res - target) {
-				res = sum
-			}
 		}
 	}
-	return res
+	return result
 }
 
-
-func main() {
-	fmt.Println(threeSumClosest([]int{-1, 2, 1, -4}, 1))
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
 }
